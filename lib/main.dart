@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ice_cream_shop/contact_page.dart';
 import 'package:ice_cream_shop/map_page.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'menu_page.dart';
 import 'providers/cart_provider.dart';
 
@@ -95,17 +96,101 @@ class HomePage extends StatelessWidget {
                 child: Text('See Our Menu'),
               ),
               SizedBox(height: 20),
+              // Page contact a décommenter si le client veut une page contact en plus.
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => ContactPage()),
+              //     );
+              //   },
+              //   style: ElevatedButton.styleFrom(
+              //     backgroundColor: Color(0xFF1C1C1C),
+              //   ),
+              //   child: Text('Contact Us'),
+              // ),
+              SizedBox(height: 20),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.store,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 5),
+                  Flexible(
+                    child: Text(
+                      'Address: 14 Rue Pasteur, Saint-Denis 97400, La Réunion',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              // Opening Hours
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.schedule,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 5),
+                  Flexible(
+                    child: Text(
+                      'Opening Hours: Monday to Friday - 9:00 AM to 7:00 PM',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              // Phone
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.phone_iphone,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 5),
+                  Flexible(
+                    child: Text(
+                      'Phone: +262 692 38 08 54',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ContactPage()),
-                  );
+                onPressed: () async {
+                  const phoneNumber = '0692380854';
+                  final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
+                  try {
+                    await launchUrl(phoneUri,
+                        mode: LaunchMode.externalApplication);
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                          content: Text('Error: Unable to open phone dialer')),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFF1C1C1C),
                 ),
-                child: Text('Contact Us'),
+                child: Text('Call Us'),
               ),
             ],
           ),
