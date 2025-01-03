@@ -16,7 +16,7 @@ Dans cette page, il y a une carte avec un marqueur indiquant l'emplacement du ma
 
 ### 2.3 **Page du menu**
 
-Dans la page menu, toutes les glaces proposées par le magasin sont affichées. En cliquant sur le bouton **"Add to Cart"**, l'utilisateur peut ajouter cette glace à son panier. Le panier est accessible directement dans la barre en haut, mais uniquement sur la page du menu.
+Dans la page menu, toutes les glaces proposées par le magasin sont affichées. En cliquant sur le bouton **"Add to Cart"**, l'utilisateur peut ajouter cette glace à son panier. Le panier est accessible directement dans la barre en haut sur la page du menu et la page d'accueil.
 
 ### 2.4 **Page du panier**
 
