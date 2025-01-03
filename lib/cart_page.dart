@@ -106,6 +106,14 @@ class CartPage extends StatelessWidget {
                                       ),
                                       SizedBox(height: 8.0),
                                       Text(
+                                        // Prix Unitaire
+                                        "Price per Unit: ${(item.price).toStringAsFixed(2)}€",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.grey[700],
+                                        ),
+                                      ),
+                                      Text(
                                         //Prix total
                                         "Total Price: ${cartProvider.calculateTotalPrice(item).toStringAsFixed(2)} €",
                                         style: TextStyle(
