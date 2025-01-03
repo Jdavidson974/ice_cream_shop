@@ -8,19 +8,27 @@ Cette application mobile est dédiée à une boutique de glaces. Elle permet aux
 
 ### 2.1 **Page d'accueil**
 
-L'utilisateur est accueilli par la page d'accueil avec un design futuriste et un bouton permettant d'accéder à la page du panier.
+L'utilisateur est accueilli par la page d'accueil avec un design futuriste et des boutons qui permettent d'accéder aux pages "carte de l'endroit où est situé le magasin", "menu" et "contact".
 
-### 2.2 **Page du panier**
+### 2.2 **Page carte de l'endroit où est situé le magasin**
 
-Dans la page du panier, l'utilisateur peut voir les produits qu'il a ajoutés, ainsi que le montant total de sa commande. Le bouton "Réserver maintenant" permet d'accéder à la page de réservation.
+Dans cette page, il y a une carte avec un marqueur indiquant l'emplacement du magasin.
 
-### 2.3 **Page de réservation**
+### 2.3 **Page du menu**
 
-Sur cette page, un QR code est affiché avec le message : "Ce QR code permet de passer commande directement dans nos boutiques sans passer par la caisse."
+Dans la page menu, toutes les glaces proposées par le magasin sont affichées. En cliquant sur le bouton **"Add to Cart"**, l'utilisateur peut ajouter cette glace à son panier. Le panier est accessible directement dans la barre en haut, mais uniquement sur la page du menu.
 
-### 2.4 **Page de contact**
+### 2.4 **Page du panier**
 
-L'utilisateur peut consulter l'adresse, les horaires d'ouverture, et le numéro de téléphone du magasin. Un bouton permet de lancer un appel téléphonique directement vers le numéro du magasin.
+Dans la page du panier, l'utilisateur peut voir les produits qu'il a ajoutés, ainsi que le montant total de sa commande. Le bouton **"Réserver maintenant"** permet d'accéder à la page de réservation.
+
+### 2.5 **Page de réservation**
+
+Sur cette page, un QR code est affiché avec le message : *"Ce QR code permet de passer commande directement dans nos boutiques sans passer par la caisse."*
+
+### 2.6 **Page de contact**
+
+L'utilisateur peut consulter l'adresse, les horaires d'ouverture et le numéro de téléphone du magasin. Un bouton permet de lancer un appel téléphonique directement vers le numéro du magasin.
 
 ## 3. **Technologies utilisées**
 
