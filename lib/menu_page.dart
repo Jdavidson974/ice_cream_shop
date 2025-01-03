@@ -3,6 +3,7 @@ import 'package:ice_cream_shop/cart_page.dart';
 import 'package:provider/provider.dart';
 import 'providers/cart_provider.dart';
 import 'models/cart_item.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 // import 'flavor_detail_page.dart';
 
 class MenuPage extends StatelessWidget {
@@ -113,16 +114,35 @@ class MenuPage extends StatelessWidget {
                         SizedBox(height: 16.0),
                         ElevatedButton(
                           onPressed: () {
+                            // Ajouter l'article au panier
                             final cartItem = CartItem(
                               flavorName: _getFlavorName(index),
                               imagePath: _getImagePath(index),
                               price: _getFlavorPrice(index),
                             );
-                            // Ajouter au panier
                             Provider.of<CartProvider>(context, listen: false)
                                 .addItem(cartItem);
+
+                            // Afficher un toast indiquant que l'article a bien été ajouté au panier
+                            Fluttertoast.showToast(
+                                msg: "Item added to cart!",
+                                toastLength:
+                                    Toast.LENGTH_SHORT, // Durée d'affichage
+                                gravity: ToastGravity
+                                    .BOTTOM, // Position en bas de l'écran
+                                timeInSecForIosWeb:
+                                    1, // Durée d'affichage pour iOS/Web
+                                backgroundColor: Color(
+                                    0xFF1C1C1C), // Couleur de fond du toast
+                                textColor:
+                                    Color(0xFF00FF00), // Couleur du texte
+                                fontSize: 16.0 // Taille de police du texte
+                                );
                           },
                           child: Text('Add to Cart'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF1C1C1C),
+                          ),
                         ),
                       ],
                     ),
