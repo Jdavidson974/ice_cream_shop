@@ -69,46 +69,6 @@ class HomePage extends StatelessWidget {
                 'Welcome to our Ice Cream Shop!',
                 style: TextStyle(fontSize: 24),
               ),
-              SizedBox(height: 20), // Espace entre le texte et le bouton
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MapPage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF1C1C1C),
-                ),
-                child: Text('Find Us on the Map'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MenuPage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF1C1C1C),
-                ),
-                child: Text('See Our Menu'),
-              ),
-              SizedBox(height: 20),
-              // Page contact a décommenter si le client veut une page contact en plus.
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(builder: (context) => ContactPage()),
-              //     );
-              //   },
-              //   style: ElevatedButton.styleFrom(
-              //     backgroundColor: Color(0xFF1C1C1C),
-              //   ),
-              //   child: Text('Contact Us'),
-              // ),
               SizedBox(height: 20),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,6 +132,47 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 20), // Espace entre le texte et le bouton
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MapPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF1C1C1C),
+                ),
+                child: Text('Find Us on the Map'),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MenuPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF1C1C1C),
+                ),
+                child: Text('See Our Menu'),
+              ),
+              // Page contact a décommenter si le client veut une page contact en plus ,
+              // Mais supprimer les infos de contact de cette page
+
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => ContactPage()),
+              //     );
+              //   },
+              //   style: ElevatedButton.styleFrom(
+              //     backgroundColor: Color(0xFF1C1C1C),
+              //   ),
+              //   child: Text('Contact Us'),
+              // ),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {

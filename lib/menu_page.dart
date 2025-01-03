@@ -61,20 +61,21 @@ class MenuPage extends StatelessWidget {
                       BorderRadius.circular(8.0), // Coins arrondis pour l'image
                 ),
                 child: GestureDetector(
-                  onTap: () {
-                    // Navigation vers la page de détails
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FlavorDetailPage(
-                          flavorName: _getFlavorName(index),
-                          flavorDescription: _getFlavorDescription(index),
-                          imagePath: _getImagePath(index),
-                          flavorPrice: _getFlavorPrice(index),
-                        ),
-                      ),
-                    );
-                  },
+                  //Decommenter pour ajouter l'acces à la page détail si le client en veut une.
+                  // onTap: () {
+                  //   // Navigation vers la page de détails
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => FlavorDetailPage(
+                  //         flavorName: _getFlavorName(index),
+                  //         flavorDescription: _getFlavorDescription(index),
+                  //         imagePath: _getImagePath(index),
+                  //         flavorPrice: _getFlavorPrice(index),
+                  //       ),
+                  //     ),
+                  //   );
+                  // },
                   child: Container(
                     padding: EdgeInsets.all(
                         16.0), // Padding pour que le texte ne touche pas les bords
@@ -95,12 +96,18 @@ class MenuPage extends StatelessWidget {
                               fontSize: 18,
                               fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
-                            height:
-                                8.0), // Espacement entre le nom et la description
+                        // Espacement entre le nom et la description
                         Text(
                           _getFlavorDescription(index),
                           style: TextStyle(color: Colors.white, fontSize: 14),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          " ${_getFlavorPrice(index).toString()}€ ",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(height: 16.0),
