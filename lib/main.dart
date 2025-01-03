@@ -76,11 +76,13 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
+                // Titre
                 'Welcome to our Ice Cream Shop!',
                 style: TextStyle(fontSize: 24),
               ),
               SizedBox(height: 20),
               Row(
+                //Adresse
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Icon(
@@ -101,7 +103,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 20),
-              // Opening Hours
+              // Horraire d'ouverture
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -122,7 +124,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 20),
-              // Phone
+              // Tel
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -144,6 +146,7 @@ class HomePage extends StatelessWidget {
               ),
               SizedBox(height: 20), // Espace entre le texte et le bouton
               ElevatedButton(
+                // Bouton pour acces a la page map
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -157,6 +160,7 @@ class HomePage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               ElevatedButton(
+                // Bouton pour avoir acces au menu du magasin
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -185,6 +189,7 @@ class HomePage extends StatelessWidget {
               // ),
               SizedBox(height: 20),
               ElevatedButton(
+                //Bouton pour composer le numero
                 onPressed: () async {
                   const phoneNumber = '0692380854';
                   final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);

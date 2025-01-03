@@ -21,11 +21,11 @@ class ReservationPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // QR Code (le widget QrImage est bien intégré ici)
               SizedBox(
                 width: 200.0,
                 height: 200.0,
                 child: QrImageView(
+                    // QR Code
                     data: "https://sautronjeandavidson.re/", // Données QR
                     version: QrVersions.auto,
                     size: 200.0,

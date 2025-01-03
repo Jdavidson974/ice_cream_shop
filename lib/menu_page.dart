@@ -28,21 +28,20 @@ class MenuPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/images/background.jpg'), // Change l'image ici
-            fit: BoxFit.cover, // L'image couvre toute la surface de l'écran
+            image: AssetImage('assets/images/background.jpg'),
+            fit: BoxFit.cover,
           ),
         ),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Afficher 4 éléments par ligne
+            crossAxisCount: 2, // Afficher X éléments par ligne
             crossAxisSpacing: 16.0, // Espacement horizontal entre les cartes
             mainAxisSpacing: 16.0, // Espacement vertical entre les cartes
             childAspectRatio:
                 1.0, // Aspect ratio pour garder les cartes carrées
           ),
           itemCount:
-              4, // Nombre d'éléments dans la liste (Simulation des elements recuperer en BDD)
+              4, // Nombre d'éléments dans la liste (Simulation des elements recuperé en BDD)
           itemBuilder: (context, index) {
             return Card(
               color: Color(0xFF1C1C1C), // Fond sombre pour la carte
@@ -55,8 +54,7 @@ class MenuPage extends StatelessWidget {
                   image: DecorationImage(
                     image: AssetImage(_getImagePath(
                         index)), // Chargement de l'image en fonction de l'index
-                    fit: BoxFit
-                        .cover, // L'image couvre toute la surface de la carte
+                    fit: BoxFit.cover,
                   ),
                   borderRadius:
                       BorderRadius.circular(8.0), // Coins arrondis pour l'image
@@ -132,17 +130,14 @@ class MenuPage extends StatelessWidget {
                                     .BOTTOM, // Position en bas de l'écran
                                 timeInSecForIosWeb:
                                     1, // Durée d'affichage pour iOS/Web
-                                backgroundColor: Color(
-                                    0xFF1C1C1C), // Couleur de fond du toast
-                                textColor:
-                                    Color(0xFF00FF00), // Couleur du texte
-                                fontSize: 16.0 // Taille de police du texte
-                                );
+                                backgroundColor: Color(0xFF1C1C1C),
+                                textColor: Color(0xFF00FF00),
+                                fontSize: 16.0);
                           },
-                          child: Text('Add to Cart'),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFF1C1C1C),
                           ),
+                          child: Text('Add to Cart'),
                         ),
                       ],
                     ),

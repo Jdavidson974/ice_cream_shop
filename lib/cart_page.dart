@@ -37,6 +37,7 @@ class CartPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final item = cartProvider.cartItems[index];
                         return Card(
+                          //Card
                           margin: EdgeInsets.symmetric(
                             vertical: 10.0,
                             horizontal: 16.0,
@@ -65,6 +66,7 @@ class CartPage extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
+                                        // Saveur
                                         item.flavorName,
                                         style: TextStyle(
                                           fontSize: 18,
@@ -75,6 +77,7 @@ class CartPage extends StatelessWidget {
                                       Row(
                                         children: [
                                           IconButton(
+                                            //Bouton -
                                             icon: Icon(Icons.remove),
                                             onPressed: () {
                                               cartProvider.updateQuantity(
@@ -83,6 +86,7 @@ class CartPage extends StatelessWidget {
                                             color: Colors.red,
                                           ),
                                           Text(
+                                            //Quantité
                                             "X ${item.quantity}",
                                             style: TextStyle(
                                               fontSize: 16,
@@ -90,6 +94,7 @@ class CartPage extends StatelessWidget {
                                             ),
                                           ),
                                           IconButton(
+                                            //Bouton +
                                             icon: Icon(Icons.add),
                                             onPressed: () {
                                               cartProvider.updateQuantity(
@@ -101,6 +106,7 @@ class CartPage extends StatelessWidget {
                                       ),
                                       SizedBox(height: 8.0),
                                       Text(
+                                        //Prix total
                                         "Total Price: ${cartProvider.calculateTotalPrice(item).toStringAsFixed(2)} €",
                                         style: TextStyle(
                                           fontSize: 16,
@@ -111,6 +117,7 @@ class CartPage extends StatelessWidget {
                                   ),
                                 ),
                                 IconButton(
+                                  //Icone suppression de l'article
                                   icon: Icon(
                                     Icons.remove_shopping_cart,
                                     color: Colors.red,
@@ -140,6 +147,7 @@ class CartPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
+                            // Texte Montant Total
                             "Total Amount:",
                             style: TextStyle(
                               fontSize: 20,
@@ -148,6 +156,7 @@ class CartPage extends StatelessWidget {
                             ),
                           ),
                           Text(
+                            // Valeur Montant total
                             "${cartProvider.totalAmount.toStringAsFixed(2)} €",
                             style: TextStyle(
                               fontSize: 20,
@@ -159,6 +168,7 @@ class CartPage extends StatelessWidget {
                       ),
                       SizedBox(height: 16.0),
                       ElevatedButton(
+                        // Bouton Reserver
                         onPressed: () {
                           Navigator.push(
                             context,
