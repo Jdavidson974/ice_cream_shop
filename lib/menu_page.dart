@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ice_cream_shop/flavor_detail_page.dart';
+import 'package:ice_cream_shop/cart_page.dart';
+import 'package:provider/provider.dart';
+import 'providers/cart_provider.dart';
+import 'models/cart_item.dart';
+import 'flavor_detail_page.dart';
 
 class MenuPage extends StatelessWidget {
   @override
@@ -7,6 +11,18 @@ class MenuPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Our Ice Cream Menu'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart), // Icône du panier
+            onPressed: () {
+              // Navigation vers la page du panier
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartPage()),
+              );
+            },
+          ),
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -18,18 +34,17 @@ class MenuPage extends StatelessWidget {
         ),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4, // Afficher 4 éléments par ligne
+            crossAxisCount: 2, // Afficher 4 éléments par ligne
             crossAxisSpacing: 16.0, // Espacement horizontal entre les cartes
             mainAxisSpacing: 16.0, // Espacement vertical entre les cartes
             childAspectRatio:
                 1.0, // Aspect ratio pour garder les cartes carrées
           ),
           itemCount:
-              4, // Nombre d'éléments dans la liste (Simulation des elements recuperé en BDD)
+              4, // Nombre d'éléments dans la liste (Simulation des elements recuperer en BDD)
           itemBuilder: (context, index) {
             return Card(
               color: Color(0xFF1C1C1C), // Fond sombre pour la carte
-
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(
                     8.0), // Coins arrondis pour les cartes
@@ -87,6 +102,20 @@ class MenuPage extends StatelessWidget {
                           _getFlavorDescription(index),
                           style: TextStyle(color: Colors.white, fontSize: 14),
                           textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 16.0),
+                        ElevatedButton(
+                          onPressed: () {
+                            final cartItem = CartItem(
+                              flavorName: _getFlavorName(index),
+                              imagePath: _getImagePath(index),
+                              price: _getFlavorPrice(index),
+                            );
+                            // Ajouter au panier
+                            Provider.of<CartProvider>(context, listen: false)
+                                .addItem(cartItem);
+                          },
+                          child: Text('Add to Cart'),
                         ),
                       ],
                     ),

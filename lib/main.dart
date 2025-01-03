@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:ice_cream_shop/contact_page.dart';
-import 'package:ice_cream_shop/menu_page.dart';
-import 'map_page.dart';
+import 'package:ice_cream_shop/map_page.dart';
+import 'package:provider/provider.dart';
+import 'menu_page.dart';
+import 'providers/cart_provider.dart';
 
 void main() {
-  runApp(IceCreamShopApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CartProvider(),
+      child: IceCreamShopApp(),
+    ),
+  );
 }
 
 class IceCreamShopApp extends StatelessWidget {
@@ -34,7 +41,7 @@ class IceCreamShopApp extends StatelessWidget {
           ),
         ),
       ),
-      home: HomePage(), // Page d'accueil
+      home: HomePage(),
     );
   }
 }
@@ -49,8 +56,7 @@ class HomePage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/images/background.jpg'), // Change l'image ici
+            image: AssetImage('assets/images/background.jpg'),
             fit: BoxFit.fill, // L'image couvre toute la surface de l'écran
           ),
         ),
