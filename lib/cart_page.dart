@@ -18,7 +18,7 @@ class CartPage extends StatelessWidget {
             image: AssetImage(
               'assets/images/background.jpg',
             ),
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           ),
         ),
         child: Column(

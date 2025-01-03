@@ -58,7 +58,7 @@ class HomePage extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/background.jpg'),
-            fit: BoxFit.fill, // L'image couvre toute la surface de l'écran
+            fit: BoxFit.cover, // L'image couvre toute la surface de l'écran
           ),
         ),
         child: Center(
