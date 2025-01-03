@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ice_cream_shop/contact_page.dart';
+// import 'package:ice_cream_shop/contact_page.dart';
 import 'package:ice_cream_shop/map_page.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';

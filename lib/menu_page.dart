@@ -3,7 +3,7 @@ import 'package:ice_cream_shop/cart_page.dart';
 import 'package:provider/provider.dart';
 import 'providers/cart_provider.dart';
 import 'models/cart_item.dart';
-import 'flavor_detail_page.dart';
+// import 'flavor_detail_page.dart';
 
 class MenuPage extends StatelessWidget {
   @override
