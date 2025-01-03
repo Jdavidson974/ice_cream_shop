@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ice_cream_shop/cart_page.dart';
 // import 'package:ice_cream_shop/contact_page.dart';
 import 'package:ice_cream_shop/map_page.dart';
 import 'package:provider/provider.dart';
@@ -51,9 +52,18 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Ice Cream Shop'),
-      ),
+      appBar: AppBar(title: Text('Ice Cream Shop'), actions: [
+        IconButton(
+          icon: Icon(Icons.shopping_cart), // Icône du panier
+          onPressed: () {
+            // Navigation vers la page du panier
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CartPage()),
+            );
+          },
+        ),
+      ]),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
