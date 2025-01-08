@@ -37,7 +37,7 @@ Sur cette page, un QR code est affiché avec le message : *"Ce QR code permet de
 
 ### 4.1 **Installation sur Android**
 
-1. Télécharger l'APK à partir de ce lien : [ice_cream_shop.apk](https://github.com/Jdavidson974/ice_cream_shop/raw/refs/heads/main/ice_scream_shop.apk).
+1. Télécharger l'APK à partir de ce lien : [[ice_cream_shop.apk](https://github.com/Jdavidson974/ice_cream_shop/raw/refs/heads/main/ice_scream_shop.apk)].
 2. Sur un appareil Android, autorisez l'installation d'applications à partir de sources inconnues si ce n'est pas déjà fait.
 3. Ouvrir le fichier APK et procéder à l'installation.
 
