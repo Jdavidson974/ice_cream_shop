@@ -4,19 +4,24 @@ import 'package:provider/provider.dart';
 import 'providers/cart_provider.dart';
 import 'models/cart_item.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-// import 'flavor_detail_page.dart';
 
 class MenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Our Ice Cream Menu'),
+        backgroundColor: Colors.black,
+        title: Text(
+          'Our Ice Cream Menu',
+          style: TextStyle(
+            fontFamily: 'Orbitron',
+            color: Color(0xFF00FFFF),
+          ),
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart), // Icône du panier
+            icon: Icon(Icons.shopping_cart, color: Color(0xFF00FFFF)),
             onPressed: () {
-              // Navigation vers la page du panier
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => CartPage()),
@@ -27,122 +32,133 @@ class MenuPage extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/background.jpg'),
-            fit: BoxFit.cover,
+          gradient: LinearGradient(
+            colors: [Colors.black, Color(0xFF1A1A2E)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Afficher X éléments par ligne
-            crossAxisSpacing: 16.0, // Espacement horizontal entre les cartes
-            mainAxisSpacing: 16.0, // Espacement vertical entre les cartes
-            childAspectRatio:
-                1.0, // Aspect ratio pour garder les cartes carrées
+            crossAxisCount: 2, // Deux colonnes
+            crossAxisSpacing: 16.0,
+            mainAxisSpacing: 16.0,
+            childAspectRatio: 0.65, // Plus de hauteur pour le contenu
           ),
-          itemCount:
-              4, // Nombre d'éléments dans la liste (Simulation des elements recuperé en BDD)
+          padding: EdgeInsets.all(16.0),
+          itemCount: 4,
           itemBuilder: (context, index) {
             return Card(
-              color: Color(0xFF1C1C1C), // Fond sombre pour la carte
+              color: Colors.black,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                    8.0), // Coins arrondis pour les cartes
+                borderRadius: BorderRadius.circular(15.0),
               ),
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(_getImagePath(
-                        index)), // Chargement de l'image en fonction de l'index
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius:
-                      BorderRadius.circular(8.0), // Coins arrondis pour l'image
-                ),
-                child: GestureDetector(
-                  //Decommenter pour ajouter l'acces à la page détail si le client en veut une.
-                  // onTap: () {
-                  //   // Navigation vers la page de détails
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => FlavorDetailPage(
-                  //         flavorName: _getFlavorName(index),
-                  //         flavorDescription: _getFlavorDescription(index),
-                  //         imagePath: _getImagePath(index),
-                  //         flavorPrice: _getFlavorPrice(index),
-                  //       ),
-                  //     ),
-                  //   );
-                  // },
-                  child: Container(
-                    padding: EdgeInsets.all(
-                        16.0), // Padding pour que le texte ne touche pas les bords
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(
-                          0.5), // Fond semi-transparent pour améliorer la lisibilité du texte
-                      borderRadius: BorderRadius.circular(
-                          8.0), // Coins arrondis pour le fond du texte
+              elevation: 8.0,
+              shadowColor: Color(0xFF00FFFF).withOpacity(0.5), // Ombre néon
+              child: Column(
+                children: [
+                  // IMAGE
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(15.0),
+                        ),
+                        image: DecorationImage(
+                          image: AssetImage(_getImagePath(index)),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          _getFlavorName(index),
-                          style: TextStyle(
-                              color: Colors.white,
+                  ),
+                  // CONTENU DYNAMIQUE
+                  Expanded(
+                    flex: 3, // Plus d'espace pour gérer la description
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          // NOM
+                          Text(
+                            _getFlavorName(index),
+                            style: TextStyle(
+                              fontFamily: 'Orbitron',
+                              color: Color(0xFFFF00FF),
                               fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        // Espacement entre le nom et la description
-                        Text(
-                          _getFlavorDescription(index),
-                          style: TextStyle(color: Colors.white, fontSize: 14),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          " ${_getFlavorPrice(index).toString()}€ ",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 16.0),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Ajouter l'article au panier
-                            final cartItem = CartItem(
-                              flavorName: _getFlavorName(index),
-                              imagePath: _getImagePath(index),
-                              price: _getFlavorPrice(index),
-                            );
-                            Provider.of<CartProvider>(context, listen: false)
-                                .addItem(cartItem);
-
-                            // Afficher un toast indiquant que l'article a bien été ajouté au panier
-                            Fluttertoast.showToast(
-                                msg: "Item added to cart!",
-                                toastLength:
-                                    Toast.LENGTH_SHORT, // Durée d'affichage
-                                gravity: ToastGravity
-                                    .BOTTOM, // Position en bas de l'écran
-                                timeInSecForIosWeb:
-                                    1, // Durée d'affichage pour iOS/Web
-                                backgroundColor: Color(0xFF1C1C1C),
-                                textColor: Color(0xFF00FF00),
-                                fontSize: 16.0);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF1C1C1C),
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          child: Text('Add to Cart'),
-                        ),
-                      ],
+                          SizedBox(height: 4.0),
+                          // DESCRIPTION
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Text(
+                                _getFlavorDescription(index),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 4.0),
+                          // PRIX
+                          Text(
+                            "${_getFlavorPrice(index)}€",
+                            style: TextStyle(
+                              color: Color(0xFFFF00FF), // Vert néon
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+                  // BOUTON
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        final cartItem = CartItem(
+                          flavorName: _getFlavorName(index),
+                          imagePath: _getImagePath(index),
+                          price: _getFlavorPrice(index),
+                        );
+                        Provider.of<CartProvider>(context, listen: false)
+                            .addItem(cartItem);
+
+                        Fluttertoast.showToast(
+                          msg: "Item added to cart!",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Color(0xFF1C1C1C),
+                          textColor: Color(0xFFFF00FF),
+                          fontSize: 16.0,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        side: BorderSide(color: Color(0xFF00FFFF), width: 2),
+                      ),
+                      child: Text(
+                        'Add to Cart',
+                        style: TextStyle(
+                          color: Color(0xFF00FFFF),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             );
           },
@@ -151,24 +167,21 @@ class MenuPage extends StatelessWidget {
     );
   }
 
-  //Simulation des data obtenus en BDD
-  // Fonction pour obtenir le chemin de l'image en fonction de l'index
   String _getImagePath(int index) {
     switch (index) {
       case 0:
-        return 'assets/images/vanilla.jpg'; // Image de la saveur Vanille
+        return 'assets/images/vanilla.jpg';
       case 1:
-        return 'assets/images/chocolate.jpg'; // Image de la saveur Chocolat
+        return 'assets/images/chocolate.jpg';
       case 2:
-        return 'assets/images/strawberry.jpg'; // Image de la saveur Fraise
+        return 'assets/images/strawberry.jpg';
       case 3:
-        return 'assets/images/mint.jpg'; // Image de la saveur Menthe
+        return 'assets/images/mint.jpg';
       default:
-        return 'assets/images/default.jpg'; // Image par défaut
+        return 'assets/images/default.jpg';
     }
   }
 
-  // Fonction pour obtenir le nom de la saveur en fonction de l'index
   String _getFlavorName(int index) {
     switch (index) {
       case 0:
@@ -184,7 +197,6 @@ class MenuPage extends StatelessWidget {
     }
   }
 
-  // Fonction pour obtenir le nom de la saveur en fonction de l'index
   int _getFlavorPrice(int index) {
     switch (index) {
       case 0:
@@ -200,17 +212,16 @@ class MenuPage extends StatelessWidget {
     }
   }
 
-  // Fonction pour obtenir la description de la saveur en fonction de l'index
   String _getFlavorDescription(int index) {
     switch (index) {
       case 0:
-        return 'Delicious vanilla ice cream';
+        return 'Delicious vanilla ice cream with a touch of sweetness.';
       case 1:
-        return 'Rich chocolate ice cream';
+        return 'Rich and creamy chocolate for chocolate lovers.';
       case 2:
-        return 'Sweet strawberry ice cream';
+        return 'Sweet and tangy strawberry, perfect for summer.';
       case 3:
-        return 'Fresh mint ice cream';
+        return 'Fresh mint with a cooling sensation.';
       default:
         return '';
     }

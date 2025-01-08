@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ice_cream_shop/cart_page.dart';
-// import 'package:ice_cream_shop/contact_page.dart';
 import 'package:ice_cream_shop/map_page.dart';
+import 'package:ice_cream_shop/menu_page.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'menu_page.dart';
 import 'providers/cart_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(
@@ -22,25 +21,46 @@ class IceCreamShopApp extends StatelessWidget {
     return MaterialApp(
       title: 'Ice Cream Shop',
       theme: ThemeData(
-        primaryColor: Color(0xFF00FF00),
-        colorScheme: ColorScheme.light(
-          primary: Color(0xFF00FF00),
-          secondary: Color(0xFF00FF00),
+        brightness: Brightness.dark,
+        primaryColor: Color(0xFF00FFFF), // Bleu néon
+        colorScheme: ColorScheme.dark(
+          primary: Color(0xFF00FFFF),
+          secondary: Color(0xFFFF00FF), // Rose néon
         ),
-        scaffoldBackgroundColor: Color(0xFF121212), // Fond sombre
+        scaffoldBackgroundColor: Color(0xFF000000), // Fond noir
         textTheme: TextTheme(
-          bodyLarge: TextStyle(color: Colors.white, fontSize: 18),
-          bodyMedium: TextStyle(color: Colors.white, fontSize: 18),
+          bodyLarge: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontFamily: 'Orbitron',
+          ),
+          bodyMedium: TextStyle(
+            color: Colors.white60,
+            fontSize: 16,
+            fontFamily: 'Orbitron',
+          ),
           headlineLarge: TextStyle(
-              color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
+            color: Color(0xFF00FFFF),
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Orbitron',
+          ),
         ),
         appBarTheme: AppBarTheme(
-          color: Color(0xFF1C1C1C),
-          elevation: 0,
-          titleTextStyle: TextStyle(color: Colors.white, fontSize: 24),
-          iconTheme: IconThemeData(
-            color: Color(0xFF00FF00), // Vert néon pour la flèche
+          backgroundColor: Color(0xFF1A1A1A),
+          elevation: 10,
+          shadowColor: Color(0xFF00FFFF), // Effet de lueur
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontFamily: 'Orbitron',
           ),
+          iconTheme: IconThemeData(
+            color: Color(0xFFFF00FF), // Rose néon pour les icônes
+          ),
+        ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Color(0xFF00FFFF),
         ),
       ),
       home: HomePage(),
@@ -52,23 +72,26 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Ice Cream Shop'), actions: [
-        IconButton(
-          icon: Icon(Icons.shopping_cart), // Icône du panier
-          onPressed: () {
-            // Navigation vers la page du panier
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CartPage()),
-            );
-          },
-        ),
-      ]),
+      appBar: AppBar(
+        title: Text('Ice Cream Shop'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart, color: Color(0xFF00FFFF)),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartPage()),
+              );
+            },
+          ),
+        ],
+      ),
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/background.jpg'),
-            fit: BoxFit.cover, // L'image couvre toute la surface de l'écran
+          gradient: LinearGradient(
+            colors: [Color(0xFF1A1A1A), Color(0xFF000000)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
         child: Center(
@@ -76,11 +99,10 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                // Titre
                 'Welcome to our Ice Cream Shop!',
-                style: TextStyle(fontSize: 24),
+                style: Theme.of(context).textTheme.headlineLarge,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 30),
               Row(
                 //Adresse
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,6 +139,7 @@ class HomePage extends StatelessWidget {
                       'Opening Hours: Monday to Friday - 9:00 AM to 7:00 PM',
                       style: TextStyle(
                         fontSize: 16,
+                        fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
@@ -139,57 +162,38 @@ class HomePage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 20), // Espace entre le texte et le bouton
-              ElevatedButton(
-                // Bouton pour acces a la page map
+              SizedBox(height: 20),
+              NeonButton(
+                text: 'Find Us on the Map',
+                color: Color(0xFF00FFFF),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => MapPage()),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF1C1C1C),
-                ),
-                child: Text('Find Us on the Map'),
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                // Bouton pour avoir acces au menu du magasin
+              NeonButton(
+                text: 'See Our Menu',
+                color: Color(0xFFFF00FF),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => MenuPage()),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF1C1C1C),
-                ),
-                child: Text('See Our Menu'),
               ),
-              // Page contact a décommenter si le client veut une page contact en plus ,
-              // Mais supprimer les infos de contact de cette page
-
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(builder: (context) => ContactPage()),
-              //     );
-              //   },
-              //   style: ElevatedButton.styleFrom(
-              //     backgroundColor: Color(0xFF1C1C1C),
-              //   ),
-              //   child: Text('Contact Us'),
-              // ),
               SizedBox(height: 20),
-              ElevatedButton(
-                //Bouton pour composer le numero
+              NeonButton(
+                text: 'Call Us',
+                color: Color(0xFF00FFFF),
                 onPressed: () async {
                   const phoneNumber = '0692380854';
                   final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
@@ -203,13 +207,44 @@ class HomePage extends StatelessWidget {
                     );
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF1C1C1C),
-                ),
-                child: Text('Call Us'),
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class NeonButton extends StatelessWidget {
+  final String text;
+  final Color color;
+  final VoidCallback onPressed;
+
+  NeonButton(
+      {required this.text, required this.color, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        backgroundColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+        side: BorderSide(color: color, width: 2),
+        shadowColor: color,
+        elevation: 10,
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: color,
+          fontSize: 18,
+          fontFamily: 'Orbitron',
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

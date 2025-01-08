@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart_provider.dart';
-import 'reservation_page.dart'; // Import de la page de réservation
+import 'reservation_page.dart';
 
 class CartPage extends StatelessWidget {
   @override
@@ -10,45 +10,55 @@ class CartPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your Cart'),
+        backgroundColor: Colors.black,
+        title: Text(
+          'Your Cart',
+          style: TextStyle(
+            fontFamily: 'Orbitron',
+            color: Color(0xFF00FFFF),
+          ),
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              'assets/images/background.jpg',
-            ),
-            fit: BoxFit.cover,
+          gradient: LinearGradient(
+            colors: [Colors.black, Color(0xFF1A1A2E)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
         child: Column(
           children: [
-            // Liste des items du panier
             Expanded(
               child: cartProvider.cartItems.isEmpty
                   ? Center(
                       child: Text(
                         'Your cart is empty',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        style: TextStyle(
+                          fontFamily: 'Orbitron',
+                          color: Color(0xFF00FFFF),
+                          fontSize: 18,
+                        ),
                       ),
                     )
                   : ListView.builder(
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
                       itemCount: cartProvider.cartItems.length,
                       itemBuilder: (context, index) {
                         final item = cartProvider.cartItems[index];
                         return Card(
-                          //Card
                           margin: EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 16.0,
-                          ),
+                              vertical: 8.0, horizontal: 16.0),
+                          color: Colors.black,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
                           ),
-                          elevation: 4.0,
-                          child: Container(
-                            padding: EdgeInsets.all(16.0),
+                          elevation: 6.0,
+                          shadowColor: Color(0xFF00FFFF).withOpacity(0.4),
+                          child: Padding(
+                            padding: EdgeInsets.all(12.0),
                             child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -66,69 +76,64 @@ class CartPage extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        // Saveur
                                         item.flavorName,
                                         style: TextStyle(
-                                          fontSize: 18,
+                                          fontFamily: 'Orbitron',
+                                          color: Color(0xFF00FFFF),
+                                          fontSize: 16,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black,
                                         ),
                                       ),
+                                      SizedBox(height: 8.0),
                                       Row(
                                         children: [
                                           IconButton(
-                                            //Bouton -
                                             icon: Icon(Icons.remove),
+                                            color: Colors.redAccent,
                                             onPressed: () {
                                               cartProvider.updateQuantity(
                                                   item, -1);
                                             },
-                                            color: Colors.red,
                                           ),
                                           Text(
-                                            //Quantité
-                                            "X ${item.quantity}",
+                                            "x ${item.quantity}",
                                             style: TextStyle(
                                               fontSize: 16,
-                                              color: Colors.grey[700],
+                                              color: Colors.white,
                                             ),
                                           ),
                                           IconButton(
-                                            //Bouton +
                                             icon: Icon(Icons.add),
+                                            color: Colors.greenAccent,
                                             onPressed: () {
                                               cartProvider.updateQuantity(
                                                   item, 1);
                                             },
-                                            color: Colors.green,
                                           ),
                                         ],
                                       ),
                                       SizedBox(height: 8.0),
                                       Text(
-                                        // Prix Unitaire
                                         "Price per Unit: ${(item.price).toStringAsFixed(2)}€",
                                         style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.grey[700],
+                                          fontSize: 14,
+                                          color: Colors.grey[400],
                                         ),
                                       ),
                                       Text(
-                                        //Prix total
-                                        "Total Price: ${cartProvider.calculateTotalPrice(item).toStringAsFixed(2)} €",
+                                        "Total Price: ${cartProvider.calculateTotalPrice(item).toStringAsFixed(2)}€",
                                         style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.grey[700],
+                                          fontSize: 14,
+                                          color: Colors.grey[400],
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
                                 IconButton(
-                                  //Icone suppression de l'article
                                   icon: Icon(
-                                    Icons.remove_shopping_cart,
-                                    color: Colors.red,
+                                    Icons.delete_forever,
+                                    color: Colors.redAccent,
                                   ),
                                   onPressed: () {
                                     cartProvider.removeItem(item);
@@ -141,32 +146,36 @@ class CartPage extends StatelessWidget {
                       },
                     ),
             ),
-            // Afficher la section Montant Total et bouton Réserver seulement si le panier n'est pas vide
             if (cartProvider.cartItems.isNotEmpty)
               SafeArea(
-                // Ajouter SafeArea pour éviter que la section soit masquée
                 child: Container(
                   padding:
                       EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-                  color: Colors.black.withOpacity(0.8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      topRight: Radius.circular(20.0),
+                    ),
+                    color: Colors.black.withOpacity(0.9),
+                  ),
                   child: Column(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            // Texte Montant Total
                             "Total Amount:",
                             style: TextStyle(
+                              fontFamily: 'Orbitron',
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Color(0xFF00FFFF),
                             ),
                           ),
                           Text(
-                            // Valeur Montant total
-                            "${cartProvider.totalAmount.toStringAsFixed(2)} €",
+                            "${cartProvider.totalAmount.toStringAsFixed(2)}€",
                             style: TextStyle(
+                              fontFamily: 'Orbitron',
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.greenAccent,
@@ -176,7 +185,6 @@ class CartPage extends StatelessWidget {
                       ),
                       SizedBox(height: 16.0),
                       ElevatedButton(
-                        // Bouton Reserver
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -185,14 +193,22 @@ class CartPage extends StatelessWidget {
                             ),
                           );
                         },
-                        child: Text("Reserve Now"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFF1C1C1C),
-                          padding: EdgeInsets.symmetric(
-                            vertical: 12.0,
-                            horizontal: 24.0,
+                          side: BorderSide(color: Color(0xFF00FFFF), width: 2),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
-                          textStyle: TextStyle(fontSize: 18),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 12.0, horizontal: 24.0),
+                        ),
+                        child: Text(
+                          "Reserve Now",
+                          style: TextStyle(
+                            fontFamily: 'Orbitron',
+                            color: Color(0xFF00FFFF),
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ],
